@@ -1,0 +1,73 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" >
+    <link rel="stylesheet" href="{% static 'css/custom.css' %}" >
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'img/kemhan_logo.png' %}">
+    <title>Document</title>
+</head>
+<body style="font-family: Oswald, Helvetica, Arial, sans-serif!important; font-size: 15px;" class="text-light">
+
+    <div class="css">
+        <div class="container mt-5 pt-5" >
+          <div class="row">
+            <div class="col-12 col-sm-7 col-md-4 m-auto">
+              <div class="card shadow  border-4 border-primary">
+                <div class="card-body">
+                  <div class="text-center mb-4">
+                    <a href="{% url 'login' %}">
+                      <img
+                        src="{% static 'img/kemhan_logoxx1.png'%}"
+                        alt="KEMHAN LOGO"
+                        width="180"
+                        height="180"
+                      />
+                    </a>
+                  </div>
+                  <div style="font-size: 1.6rem; margin-bottom: 6px;" class="text-center text-white"> 
+                     e-Arsip Baranahan
+                  </div>
+                  <form method="POST" action="{% url 'login' %}">
+                    {% csrf_token %}
+                    <input
+                      type="text"
+                      name="username"
+                      id="username"
+                      class="form-control py-2"
+                      placeholder="Username"
+                      required
+                    />
+                    <input
+                      type="password"
+                      name="password"
+                      id="password"
+                      class="form-control my-4 py-2"
+                      placeholder="Password"
+                      required
+                    />
+                    <div class="d-grid text-center mt-3 mb-4">
+                      <button class="btn btn-primary">Login</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+
+    <script type="text/javascript" src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/font_awsome.js' %}"></script>
+    {% comment %} <script type="text/javascript" src="{% static 'js/jquery-3.7.0.js' %}"></script> 
+    <script type="text/javascript" src="{% static 'js/jquery.dataTables.min.js' %}"></script> 
+    <script type="text/javascript" src="{% static 'js/dataTables.bootstrap5.min.js' %}"></script>  {% endcomment %}
+
+
+</body>
+</html>
