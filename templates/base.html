@@ -1,3 +1,4 @@
+{% load compress %}
 {% load static %}
 
 <!DOCTYPE html>
@@ -5,9 +6,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    {% compress css inline %}
+
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" >
-    <link rel="stylesheet" href="{% static 'css/dataTables.bootstrap5.min.css' %}" > 
+    <link rel="stylesheet" href="{% static 'css/dataTables.bootstrap5.min.css' %}">
+    {% endcompress %}
+
+
+    {% compress js inline %}
     <script type="text/javascript" src="{% static 'js/chart.min.js' %}"></script> 
+    {% endcompress %}
+
     <link rel="shortcut icon" type="image/x-icon" href="{% static 'img/kemhan_logo.png' %}">
 
     <title>{{ page_title }}</title>
@@ -15,23 +25,38 @@
 </head>
 <body style="font-family: Oswald, Helvetica, Arial, sans-serif!important; font-size: 14px;" class="text-light">
 
-   
 
             {% block dashboard %}{% endblock dashboard %}
+            {% block laporan %}{% endblock laporan %}
+            {% block surat %}{% endblock surat %}
 
-
+            {% compress js inline %}
             <script type="text/javascript" src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
             <script type="text/javascript" src="{% static 'js/font_awsome.js' %}"></script>
             <script type="text/javascript" src="{% static 'js/jquery-3.7.1.slim.min.js' %}"></script>
             <script type="text/javascript" src="{% static 'js/custom.js' %}"></script>
             <script type="text/javascript" src="{% static 'js/jquery.dataTables.min.js' %}"></script> 
             <script type="text/javascript" src="{% static 'js/dataTables.bootstrap5.min.js' %}"></script> 
+            
+            {% endcompress %}
 
-            <script>
+
+            {% comment %} <script>
+
+                $(document).ready(function(){
+                    function active_link_menu() {
+                        $('.nav .nav-link').click(function(e){
+                            e.preventDefault();
+                            $('.nav .nav-link').removeClass('active');
+                            $(this).addClass('active');
+                        });
+                    } 
+                });
+                
+
+            </script> {% endcomment %}
 
 
-
-            </script>
     
   
 

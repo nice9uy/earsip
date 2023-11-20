@@ -5,10 +5,21 @@ from django.contrib.auth.decorators import login_required
 
 @login_required(login_url="/accounts/login/")
 def dashboard(request):
+
+    context = {
+        'page_title' : "Dashboard"
+    }
     
-    return render(request,'earsip/dashboard.html')
+    return render(request,'earsip/pages/dashboard.html' , context)
 
 
-def test(request):
+@login_required(login_url="/accounts/login/")
+def laporan(request):
     
-    return render(request,'earsip/dashboard.html')
+    return render(request,'earsip/pages/laporan.html')
+
+
+@login_required(login_url="/accounts/login/")
+def surat(request):
+    
+    return render(request,'earsip/pages/laporan.html')

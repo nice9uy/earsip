@@ -1,0 +1,54 @@
+{% load compress %}
+{% load static %}
+
+<div>
+  <nav class="navbar bg-body-secondary">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="{% url 'dashboard' %}">
+        <img src="{% static 'img/kemhan_logo.png' %}" alt="KEMHAN Logo" width="45" height="45" />
+        <span>e-Arsip Baranahan</span>
+      </a>
+
+      <ul class="nav nav-underline">
+        <div style="margin-right: 3.5rem;" class="d-flex gap-4">
+          <li class="nav-item">
+            <a class="nav-link {% if request.path == '/earsip/dashboard/' %} active {% endif %}" href="{% url 'dashboard' %}">Dashboard</a>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a id="surat" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Laporan</a>
+            <ul class="dropdown-menu">
+              <li>
+                <a class="dropdown-item" href="{% url 'laporan' %}">Action</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="#">Another action</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="#">Something else here</a>
+              </li>
+              <li>
+                <hr class="dropdown-divider" />
+              </li>
+              <li>
+                <a class="dropdown-item" href="#">Separated link</a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link {% if request.path == '/earsip/surat/' %}  active {% endif %}" href="{% url 'surat' %}">Surat</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link {% if request.path == '/earsip/laporan/' %} active {% endif %}" href="{% url 'laporan' %}">Laporan</a>
+          </li>
+        </div>
+
+        <li class="nav-item">
+          <a type="button" class="btn btn-danger fa fa-sign-out mt-1" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Logout" href="{% url 'logout' %}"></a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</div>
