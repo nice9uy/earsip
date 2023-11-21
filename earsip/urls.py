@@ -20,6 +20,12 @@ from django.views.generic import RedirectView
 from django.conf import settings
 from django.conf.urls.static import static
 
+
+admin.site.site_header = 'e-Arsip Baranahan'                    # default: "Django Administration"
+admin.site.index_title = 'Administrator e-Arsip'                 # default: "Site administration"
+admin.site.site_title = 'e-Arsip Baranahan' # default: "Django site admin"
+
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',RedirectView.as_view(url='earsip/dashboard/')),
