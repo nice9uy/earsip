@@ -87,7 +87,7 @@
           <h1 class="modal-title fs-5" id="exampleModalLabel">Tambah Sub Klasifikasi</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-          <form action="" method="POST" class="was-validated">
+          <form action="{% url 'add_setting_subklasifikasi' %}" method="POST" class="was-validated">
             {% csrf_token %}
             <div class="modal-body">
                 <div class="mb-3">
@@ -105,20 +105,20 @@
 <!-- modal untuk edit Sub Klasifikasi  -->
 
 
-{% for data in kelompok %} 
-<div class="modal fade" id="edit_SubKatagori{{ data.id }}" tabindex="-1" aria-labelledby="edit_kelompok" aria-hidden="true">
+{% for data in subklasifikasi %} 
+<div class="modal fade" id="edit_subklasifikasi{{ data.id }}" tabindex="-1" aria-labelledby="edit_kelompok" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h1 class="modal-title fs-5" id="edit_SubKatagori">Edit Folder</h1>
+          <h1 class="modal-title fs-5" id="edit_SubKatagori">Edit Sub Klasifikasi</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
 
-        <form action="" method="POST" class="was-validated">
+        <form action="{% url 'edit_setting_subklasifikasi' data.id %}" method="POST" class="was-validated">
           {% csrf_token %}
           <div class="modal-body">
               <div class="mb-3">
-                    <input type="text" class="form-control" name="subkatagori" required value="{{ data.nama_kelompok }}">
+                    <input type="text" class="form-control" name="subklasifikasi_surat" required value="{{ data.subklasifikasi }}">
               </div>
           </div>
           <div class="modal-footer">
@@ -133,19 +133,19 @@
 
 <!-- modal untuk delete Sub Klasifikasi  -->
 
-{% for data in kelompok %} 
-  <div class="modal fade" id="delete_kelompok{{ data.id }}" tabindex="-1" aria-labelledby="delete_kelompok" aria-hidden="true">
+{% for data in subklasifikasi %} 
+  <div class="modal fade" id="delete_subklasifikasi{{ data.id }}" tabindex="-1" aria-labelledby="delete_kelompok" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h1 class="modal-title fs-5" id="delete_kelompok">Hapus Kelompok</h1>
+          <h1 class="modal-title fs-5" id="delete_kelompok">Hapus Sub Klasifikasi</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
 
-        <form action="" method="POST">
+        <form action="{% url 'delete_setting_subklasifikasi' data.id %}" method="POST">
           {% csrf_token %}
           <div class="modal-body">
-            <p>Apakah yakin Folder "{{data.nama_kelompok}}" ini ingin dihapus?</p>
+            <p>Apakah yakin Folder "{{data.subklasifikasi}}" ini ingin dihapus?</p>
           </div>
           <div class="modal-footer">
             <button type="submit" class="btn btn-primary">Hapus</button>

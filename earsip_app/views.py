@@ -144,8 +144,6 @@ def add_setting_klasifikasi(request):
         group_name = Group.objects.get(user = username)
 
         klasifikasi = request.POST.get('klasifikasi_surat')
-
-
         db_klasifikasi = KlasifikasiSurat(
             group        = group_name,
             username     = username,
@@ -213,7 +211,38 @@ def add_setting_subklasifikasi(request):
     else:
         return render(request,'pages/setting_klasifikasi.html')
     
+def edit_setting_subklasifikasi(request, id_edit_setting_subklasifikasi):
+    edit_subklasifikasi = get_object_or_404(SubKlasifikasiSurat, pk = id_edit_setting_subklasifikasi)
+
+    if request.method == 'POST':
+        username = request.user
+        group_name = Group.objects.get(user = username)
+
+        subklasifikasi = request.POST.get('subklasifikasi_surat')
     
+        edit_subklasifikasi   = SubKlasifikasiSurat(
+
+            id                 = id_edit_setting_subklasifikasi, 
+            group              = str(group_name),
+            username           = str(username),
+            subklasifikasi     = subklasifikasi
+
+        )
+        edit_subklasifikasi.save()
+
+        return redirect('setting_klasifikasi')
+    else:
+
+        return render(request,'earsip/pages/surat/setting.html')
+    
+
+@login_required(login_url="/accounts/login/")
+def delete_setting_subklasifikasi(request, id_delete_setting_subklasifikasi):
+    subklasifikasi = get_object_or_404(SubKlasifikasiSurat, pk = id_delete_setting_subklasifikasi)
+
+    if request.method == 'POST':
+        subklasifikasi.delete()
+        return redirect('setting_klasifikasi')
 
 def surat_terhapus(request):
 

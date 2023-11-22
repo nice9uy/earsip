@@ -50,8 +50,8 @@
               <tr>
                       <td>{{ data.subklasifikasi }}</td>
                       <td class="text-center"> 
-                           <button type="button" class="btn btn-success fas fa-edit"  data-bs-toggle="modal"  data-placement="bottom" title="Edit" data-bs-target="#edit_kelompok{{ data.id }}"></button>
-                           <button type="button" class="btn btn-danger fa fa-trash"  data-bs-toggle="modal"  data-placement="bottom" title="Hapus" data-bs-target="#delete_kelompok{{ data.id }}"></button>
+                           <button type="button" class="btn btn-success fas fa-edit"  data-bs-toggle="modal"  data-placement="bottom" title="Edit" data-bs-target="#edit_subklasifikasi{{ data.id }}"></button>
+                           <button type="button" class="btn btn-danger fa fa-trash"  data-bs-toggle="modal"  data-placement="bottom" title="Hapus" data-bs-target="#delete_subklasifikasi{{ data.id }}"></button>
                       </td>
                       
               </tr>
@@ -68,11 +68,11 @@
 
 {% include 'earsip/modal/surat/setting_surat.html' %}
 
-<div class="container">
+{% comment %} <div class="container">
     <footer class="py-3 my-4">
       <p class="text-center text-muted">&copy; 2023 - {% now "Y" %}  e-Arsip - Baranahan</p>
     </footer>
-</div>
+</div> {% endcomment %}
 
 
 {% endblock setting_klasifikasi %}

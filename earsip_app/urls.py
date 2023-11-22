@@ -20,6 +20,6 @@ urlpatterns = [
     path('delete_setting_klasifikasi/<int:id_delete_klasifikasi>/', views.delete_setting_klasifikasi, name='delete_setting_klasifikasi'),
 
     path("add_setting_subklasifikasi/", views.add_setting_subklasifikasi, name="add_setting_subklasifikasi"),
-    # path('edit_setting_klasifikasi/<int:id_edit_klasifikasi>/', views.edit_setting_klasifikasi, name='edit_setting_klasifikasi'),
-    # path('delete_setting_klasifikasi/<int:id_delete_klasifikasi>/', views.delete_setting_klasifikasi, name='delete_setting_klasifikasi'),
+    path('edit_setting_subklasifikasi/<int:id_edit_setting_subklasifikasi>/', views.edit_setting_subklasifikasi, name='edit_setting_subklasifikasi'),
+    path('delete_setting_subklasifikasi/<int:id_delete_setting_subklasifikasi>/', views.delete_setting_subklasifikasi, name='delete_setting_subklasifikasi'),
 ]
