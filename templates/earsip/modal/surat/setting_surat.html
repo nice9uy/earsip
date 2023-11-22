@@ -1,0 +1,157 @@
+
+{% comment %} modal Tambah Klasifikasi  {% endcomment %}
+
+<div class="modal fade" id="ModalKlasifikasi" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Tambah Klasifikasi</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+
+        <form action="{% url 'add_setting_klasifikasi' %}" method="POST" class="was-validated">
+          {% csrf_token %}
+          <div class="modal-body">
+              <div class="mb-3">
+                    <input type="text" class="form-control" id="kode_klasifikasi_surat" name="klasifikasi_surat" autofocus required>
+              </div>
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary">Save</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+<!-- modal untuk edit klasifikasi -->
+
+  {% for data in klasifikasi %} 
+    <div class="modal fade" id="edit_klasifikasi{{ data.id }}" tabindex="-1" aria-labelledby="edit_klasifikasi" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="edit_klasifikasi">Edit Klasifikasi</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <form action="{% url 'edit_setting_klasifikasi' data.id %}" method="POST" class="was-validated">
+              {% csrf_token %}
+              <div class="modal-body">
+                  <div class="mb-3">
+                        <input type="text" class="form-control" name="klasifikasi_surat" required value="{{ data.klasifikasi }}">
+                  </div>
+              </div>
+              <div class="modal-footer">
+                <button type="submit" class="btn btn-primary">Edit</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+{% endfor %}
+
+
+  <!-- modal untuk delete klasifikasi -->
+
+{% for data in klasifikasi %} 
+      <div class="modal fade" id="delete_klasifikasi{{ data.id }}" tabindex="-1" aria-labelledby="delete_klasifikasi" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="delete_klasifikasi">Hapus Klasifikasi</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <form action="{% url 'delete_setting_klasifikasi' data.id %}" method="POST">
+              {% csrf_token %}
+              <div class="modal-body">
+                <p>Apakah yakin Klasifikasi "{{data.klasifikasi}}" ini ingin dihapus?</p>
+              </div>
+              <div class="modal-footer">
+                <button type="submit" class="btn btn-primary">Hapus</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+{% endfor %}
+
+
+{% comment %} modal untuk Tambah Sub Klasifikasi {% endcomment %}
+
+  <div class="modal fade" id="ModalSubklasifikasi" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Tambah Sub Klasifikasi</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+          <form action="" method="POST" class="was-validated">
+            {% csrf_token %}
+            <div class="modal-body">
+                <div class="mb-3">
+                      <input type="text" class="form-control" id="kode_kelompok_surat" name="subklasifikasi_surat" autofocus required>
+                </div>
+            </div>
+            <div class="modal-footer ">
+              <button type="submit" class="btn btn-primary">Save</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+<!-- modal untuk edit Sub Klasifikasi  -->
+
+
+{% for data in kelompok %} 
+<div class="modal fade" id="edit_SubKatagori{{ data.id }}" tabindex="-1" aria-labelledby="edit_kelompok" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="edit_SubKatagori">Edit Folder</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+
+        <form action="" method="POST" class="was-validated">
+          {% csrf_token %}
+          <div class="modal-body">
+              <div class="mb-3">
+                    <input type="text" class="form-control" name="subkatagori" required value="{{ data.nama_kelompok }}">
+              </div>
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary">Edit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+{% endfor %}
+
+
+<!-- modal untuk delete Sub Klasifikasi  -->
+
+{% for data in kelompok %} 
+  <div class="modal fade" id="delete_kelompok{{ data.id }}" tabindex="-1" aria-labelledby="delete_kelompok" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="delete_kelompok">Hapus Kelompok</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+
+        <form action="" method="POST">
+          {% csrf_token %}
+          <div class="modal-body">
+            <p>Apakah yakin Folder "{{data.nama_kelompok}}" ini ingin dihapus?</p>
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary">Hapus</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+{% endfor %}

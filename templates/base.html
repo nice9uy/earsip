@@ -31,6 +31,10 @@
             {% block surat %}{% endblock surat %}
             {% block tambah_surat %}{% endblock tambah_surat %}
             {% block semua_surat %}{% endblock semua_surat %}
+            {% block setting_klasifikasi %}{% endblock setting_klasifikasi %}
+            {% block surat_harian %}{% endblock surat_harian %}
+            {% block duplikat_surat %}{% endblock duplikat_surat %}
+            {% block surat_terhapus %}{% endblock surat_terhapus %}
 
             {% compress js inline %}
             <script type="text/javascript" src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
@@ -41,26 +45,6 @@
             <script type="text/javascript" src="{% static 'js/dataTables.bootstrap5.min.js' %}"></script> 
             
             {% endcompress %}
-
-
-            {% comment %} <script>
-
-                $(document).ready(function(){
-                    function active_link_menu() {
-                        $('.nav .nav-link').click(function(e){
-                            e.preventDefault();
-                            $('.nav .nav-link').removeClass('active');
-                            $(this).addClass('active');
-                        });
-                    } 
-                });
-                
-
-            </script> {% endcomment %}
-
-
-    
-  
 
 </body>
 </html>

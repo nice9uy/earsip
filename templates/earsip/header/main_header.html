@@ -10,13 +10,15 @@
       </a>
 
       <ul class="nav nav-underline">
-        <div style="margin-right: 3.5rem;" class="d-flex gap-4">
+       
+        <div style="margin-right: 3.5rem; font-weight: bold; " class="d-flex gap-4">
+          <span class="mt-2 text-warning" >Selamat Datang , {{ user|capfirst }}</span>
           <li class="nav-item">
             <a class="nav-link {% if request.path == '/earsip/dashboard/' %} active {% endif %}" href="{% url 'dashboard' %}">Dashboard</a>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link {% if request.path == '/earsip/dashboard/' %} active {% endif %}" href="{% url 'dashboard' %}">Home</a>
+            <a class="nav-link {% if request.path == '/earsip/surat/' %} active {% endif %}" href="{% url 'surat' %}">Home</a>
           </li>
 
           <li class="nav-item dropdown">
@@ -32,16 +34,20 @@
                 <a class="dropdown-item {% if request.path == '/earsip/semua_surat/' %} active {% endif %}"  href="{% url 'semua_surat' %}">Semua Surat</a>
               </li>
               <li>
-                <a class="dropdown-item" href="#">Surat Perhari</a>
+                <a class="dropdown-item {% if request.path == '/earsip/surat_harian/' %} active {% endif %}"  href="{% url 'surat_harian' %}">Surat Harian</a>
               </li>
               <li>
-                <a class="dropdown-item" href="#">Duplikat Surat</a>
+                <a class="dropdown-item {% if request.path == '/earsip/duplikat_surat/' %} active {% endif %}"  href="{% url 'duplikat_surat' %}">Duplikat Surat</a>
               </li>
+              <li>
+                <a class="dropdown-item {% if request.path == '/admin/' %} active {% endif %}"  href="{% url 'admin:index' %}" >Surat Terhapus</a>
+              </li>
+              
               <li>
                 <hr class="dropdown-divider" />
               </li>
               <li>
-                <a class="dropdown-item" href="#">Setting Surat</a>
+                <a class="dropdown-item {% if request.path == '/earsip/setting_klasifikasi/' %} active {% endif %}"  href="{% url 'setting_klasifikasi' %}">Setting Surat</a>
               </li>
             </ul>
           </li>
@@ -51,14 +57,13 @@
           </li>
 
           <li class="nav-item">
+            <a class="nav-link {% if request.path == '/earsip/surat_terhapus/' %} active {% endif %}" href="{% url 'surat_terhapus' %}">Surat Terhapus</a>
+          </li>  
+          <li class="nav-item">
             <a class="nav-link {% if request.path == '/admin/' %} active {% endif %} " href="{% url 'admin:index' %}">Admin</a>
           </li>
-
-
         </div>
       
-
-
         <li class="nav-item">
           <a type="button" class="btn btn-danger fa fa-sign-out mt-1" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Logout" href="{% url 'logout' %}"></a>
         </li>

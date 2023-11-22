@@ -1,6 +1,7 @@
 $(document).ready(function () {
   active_link_menu()
   validation()
+  tabel_data()
 });
 
 
@@ -9,6 +10,18 @@ function active_link_menu() {
     e.preventDefault();
     $('.nav .nav-link a').removeClass('active');
     $(this).addClass('active');
+  });
+}
+
+function tabel_data(){
+  new DataTable('#tabel_index');
+  new DataTable('#tabel_klasifikasi',{
+    "searching": false,
+    "dom": 'rtip'
+  });
+  new DataTable('#tabel_subklasifikasi' , {
+    "searching": false,
+    "dom": 'rtip'
   });
 }
 

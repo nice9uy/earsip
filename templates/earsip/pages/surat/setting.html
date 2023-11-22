@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block setting_klasifikasi %}
+
+{% include 'earsip/header/main_header.html' %}
+
+
+<div class="d-flex flex-fill mt-2 ">
+    <div class="container-fluid mt-1 text-white">
+        <h5 class="text-center">Klasifikasi</h5>
+        <table id="tabel_klasifikasi" class="table table-striped table-bordered text-white" style="width:100%">
+            <thead>
+                <tr>
+                    <th class="text-center">Klasifikasi</th>
+                    <th class="text-center">Aksi</th>
+                    
+                </tr>
+            </thead>
+            <tbody>
+              {% for data in klasifikasi %}
+              <tr>
+                      <td>{{ data.klasifikasi }}</td>
+                      <td class="text-center"> 
+                           <button type="button" class="btn btn-success fas fa-edit"  data-bs-toggle="modal"  data-placement="bottom" title="Edit" data-bs-target="#edit_klasifikasi{{ data.id }}"></button>
+                           <button type="button" class="btn btn-danger fa fa-trash"  data-bs-toggle="modal" data-placement="bottom" title="Hapus" data-bs-target="#delete_klasifikasi{{ data.id }}"></button>
+                      </td>  
+              </tr>
+              {% endfor %}
+            </tbody>
+        </table>
+
+        <div class="gap-2 col-sm-4 mx-auto ">
+            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-placement="bottom" data-bs-target="#ModalKlasifikasi">Tambah Klasifikasi</button>
+        </div>
+    </div>
+
+    <div class="container-fluid mt-1 text-white">
+      <h5 class="text-center">Sub Klasifikasi</h5>
+      <table id="tabel_subklasifikasi" class="table table-striped table-bordered text-white" style="width:100%">
+          <thead>
+              <tr>
+                  <th class="text-center">Sub Klasifikasi</th>
+                  <th class="text-center">Aksi</th>
+              </tr>
+          </thead>
+          <tbody>
+              {% for data in subklasifikasi %}
+              <tr>
+                      <td>{{ data.subklasifikasi }}</td>
+                      <td class="text-center"> 
+                           <button type="button" class="btn btn-success fas fa-edit"  data-bs-toggle="modal"  data-placement="bottom" title="Edit" data-bs-target="#edit_kelompok{{ data.id }}"></button>
+                           <button type="button" class="btn btn-danger fa fa-trash"  data-bs-toggle="modal"  data-placement="bottom" title="Hapus" data-bs-target="#delete_kelompok{{ data.id }}"></button>
+                      </td>
+                      
+              </tr>
+              {% endfor %}
+          </tbody>
+      </table>
+      <div class="gap-2 col-sm-4 mx-auto ">
+          <button type="button" class="btn btn-success" data-bs-toggle="modal" data-placement="bottom"  data-bs-target="#ModalSubklasifikasi">Tambah Sub Klasifikasi</button>
+      </div>
+  </div>  
+
+</div>
+
+
+{% include 'earsip/modal/surat/setting_surat.html' %}
+
+<div class="container">
+    <footer class="py-3 my-4">
+      <p class="text-center text-muted">&copy; 2023 - {% now "Y" %}  e-Arsip - Baranahan</p>
+    </footer>
+</div>
+
+
+{% endblock setting_klasifikasi %}
+
+
+
+
+
+
+
+
+
