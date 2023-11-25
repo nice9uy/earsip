@@ -7,8 +7,17 @@ urlpatterns = [
     path("surat/", views.surat, name="surat"),
     path("tambah_surat/", views.tambah_surat, name="tambah_surat"),
     path("semua_surat/", views.semua_surat, name="semua_surat"),
-    path("surat_harian/", views.surat_harian, name="surat_harian"),
     path("duplikat_surat/", views.duplikat_surat, name="duplikat_surat"),
+
+    
+
+    path("surat_keluar/", views.surat_keluar, name="surat_keluar"),
+
+
+
+
+
+
 
 
     path("surat_terhapus/", views.surat_terhapus, name="surat_terhapus"),

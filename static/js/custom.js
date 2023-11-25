@@ -15,6 +15,14 @@ function active_link_menu() {
 
 function tabel_data(){
   new DataTable('#tabel_index');
+  new DataTable('#tabel_surat_keluar', {
+    "searching": false,
+    "dom": 'rtip',
+    fixedColumns: {
+      left: 1,
+      right: 1
+  },
+  });
   new DataTable('#tabel_klasifikasi',{
     "searching": false,
     "dom": 'rtip'
@@ -46,3 +54,4 @@ function validation() {
     })
   })()
 }
+

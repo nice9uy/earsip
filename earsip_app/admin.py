@@ -7,25 +7,25 @@ from .models import DeleteSurat
 from .models import KlasifikasiSurat
 from .models import SubKlasifikasiSurat
 
-class ListDatabaseSurat(admin.ModelAdmin):
-    list_display = ('id','group', 'klasifikasi', 'subklasifikasi',
-                    'tgl','no_surat','kepada','perihal',
-                    'upload_file'
-                    )
+# class ListDatabaseSurat(admin.ModelAdmin):
+#     list_display = ('id','group', 'klasifikasi', 'subklasifikasi',
+#                     'tgl','no_surat','kepada','perihal',
+#                     'upload_file'
+#                     )
 
-class ListDeleteSurat(admin.ModelAdmin):
-    list_display = ('id','group', 'klasifikasi', 'subklasifikasi',
-                    'tgl','no_surat','kepada','perihal',
-                    'upload_file'
-                    )
-class ListKlasifikasiSurat(admin.ModelAdmin):
-    list_display =  ('id','username','group', 'klasifikasi')
+# class ListDeleteSurat(admin.ModelAdmin):
+#     list_display = ('id','group', 'klasifikasi', 'subklasifikasi',
+#                     'tgl','no_surat','kepada','perihal',
+#                     'upload_file'
+#                     )
+# class ListKlasifikasiSurat(admin.ModelAdmin):
+#     list_display =  ('id','username','group', 'klasifikasi')
 
-class ListSubKlasifikasiSurat(admin.ModelAdmin):
-    list_display =  ('id','username','group' , 'subklasifikasi')
+# class ListSubKlasifikasiSurat(admin.ModelAdmin):
+#     list_display =  ('id','username','group' , 'subklasifikasi')
 
 
-admin.site.register(DatabaseSurat,ListDatabaseSurat)
-admin.site.register(DeleteSurat, ListDeleteSurat)
-admin.site.register(KlasifikasiSurat, ListKlasifikasiSurat)
-admin.site.register(SubKlasifikasiSurat,ListSubKlasifikasiSurat)
+admin.site.register(DatabaseSurat)
+admin.site.register(DeleteSurat)
+admin.site.register(KlasifikasiSurat)
+admin.site.register(SubKlasifikasiSurat)

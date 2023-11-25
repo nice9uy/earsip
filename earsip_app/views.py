@@ -10,12 +10,7 @@ from datetime import datetime, date
 @login_required(login_url="/accounts/login/")
 def dashboard(request):
 
-    y = request.user
 
-    x = Group.objects.get(user = y)
-
-    print(y)
-    print(x)
 
     context = {
         'page_title' : "Dashboard"
@@ -35,20 +30,47 @@ def laporan(request):
 
 @login_required(login_url="/accounts/login/")
 def surat(request):
+    username = request.user
+    group_name = Group.objects.get(user = username)
+
+    datasemuasurat = DatabaseSurat.objects.filter(group = group_name).values()
 
 
+    # x = instance.
 
+    context = { 
+        'datasemuasurat' : datasemuasurat
+    }
     
-    return render(request,'earsip/pages/surat/index.html')
+    return render(request,'earsip/pages/surat/index.html' , context)
+
+
+
+def semua_surat(request):
+    username = request.user
+    group_name = Group.objects.get(user = username)
+
+    datasemuasurat = DatabaseSurat.objects.filter(group = group_name).values()
+
+    context = { 
+        'datasemuasurat' : datasemuasurat
+    }
+
+    return render(request,'earsip/pages/surat/semua_surat.html', context)
 
 
 @login_required(login_url="/accounts/login/")
-def surat_harian(request):
+def surat_keluar(request):
+    username = request.user
+    group_name = Group.objects.get(user = username)
 
+    datasemuasurat = DatabaseSurat.objects.filter(group = group_name).values()
 
-    
+    context = { 
+        'datasemuasurat' : datasemuasurat
+    }
 
-    return render(request,'earsip/pages/surat/surat_harian.html')
+    return render(request,'earsip/pages/surat/surat_keluar.html', context)
 
 
 @login_required(login_url="/accounts/login/")
@@ -57,64 +79,93 @@ def tambah_surat(request):
     # id_username = request.user.pk
     # username = request.user
 
+    username = request.user
+    group_name = Group.objects.get(user = username)
+
     # now = datetime.now()
     # year = now.strftime("%Y")
 
     # hari_ini = date.today()
+
+    klasifikasi = KlasifikasiSurat.objects.filter(group = group_name).values_list('klasifikasi' , flat=True)
+    # subklasifikasi = SubKlasifikasiSurat.objects.filter(group = group_name).values_list('subklasifikasi' , flat=True)
+    
+    # print(klasifikasi)
+    # print(subklasifikasi)
+
+    # x = 'tes/567/xDe.08089.090.09/BBBBBB'
+    # r = str(x).split('/')
+    # c = r[2].split('.')
+    # final = c[0].upper()
+
+    # print(r)
+    # print(c)
+    # print(final)
+
+
     # klasifikasi = KlasifikasiSurat.objects.filter(id_user = id_username).values_list("nama_klasifikasi" , flat=True)
     # kelompok = KelompokSurat.objects.filter(id_user = id_username).values_list("nama_kelompok", flat=True)
    
     # get_surat = request.POST.get('surat')
-    # get_klasifikasi = request.POST.get('klasifikasi')
-    # get_kelompok = request.POST.get('kelompok')
-    # get_tanggal = request.POST.get('tanggal')
+    get_surat = 'Masuk'
+    get_klasifikasi = request.POST.get('klasifikasi')
+    # get_subklasifikasi = request.POST.get('subklasifikasi')
+    get_tanggal = request.POST.get('tanggal')        # 'subklasifikasi' : subklasifikasi,
 
-    # files_upload = request.FILES.get('file_name')
-    # files_name = str(files_upload).split(',')
 
-    # filename_list_count = len(files_name)
+    files_upload = request.FILES.get('file_name')
+    files_name = str(files_upload).split(',')
+
+    filename_list_count = len(files_name)
+
+
+
+    # print(get_surat)
+    # print(get_klasifikasi)
+    # print(get_subklasifikasi)
+    # print(get_tanggal)
+
+
+    try:  
+        no_surat = files_name[0]
+        kepada = files_name[1]
+        prihal = files_name[2] 
+        prihal_surat = prihal[:-4]
+
+        upload_data = DatabaseSurat(        # 'subklasifikasi' : subklasifikasi,
+
+            username        = username,
+            group           = group_name,
+            surat           = get_surat,
+            klasifikasi     = get_klasifikasi,
+            # subklasifikasi  = get_subklasifikasi,
+            tgl             = get_tanggal,
+            no_surat        = no_surat,
+            kepada          = kepada,
+            perihal         = prihal_surat,
+            upload_file     = files_upload,
+        )
+        
+    except Exception:
+        pass
+        
+    else:
+        if filename_list_count == 3:
+            upload_data.save()
+            return redirect('surat')
+        else:
+            # messages.warning(request,'bzdbdbzdb')
+            print("ada yang salah, cek lagi ")
+        
+    context = {
+        'page_title' : 'Tambah Data',
+        'klasifikasi' : klasifikasi,
+        # 'subklasifikasi' : subklasifikasi,
+        
+    }
    
-    # try:  
-    #     no_surat = files_name[0]
-    #     kepada = files_name[1]
-    #     prihal = files_name[2] 
-    #     prihal_surat = prihal[:-4]
 
-    #     upload_data = DatabaseSurat(
-    #         id_user     = id_username,
-    #         username    = username,
-    #         surat       = get_surat,
-    #         klasifikasi = get_klasifikasi,
-    #         kelompok    = get_kelompok,
-    #         tgl         = get_tanggal,
-    #         no_surat    = no_surat,
-    #         kepada      = kepada,
-    #         perihal     = prihal_surat,
-    #         upload_file = files_upload,
-    #         today       = hari_ini,
-    #         tahun       = year,
-    #     )
-        
-    # except Exception:
-    #     pass
-        
-    # else:
-    #     if filename_list_count == 3:
-    #         upload_data.save()
-    #         return redirect('home')
-    #     else:
-    #         # messages.warning(request,'bzdbdbzdb')
-    #         print("ada yang salah, cek lagi ")
-        
-    # context = {
-    #     'page_title' : 'Tambah Data',
-    #     'klasifikasi' : klasifikasi,
-    #     'kelompok' : kelompok,
-        
-    # }
-   
-
-    return render(request,'earsip/pages/surat/tambah_surat.html')
+    return render(request,'earsip/pages/surat/tambah_surat.html', context)
 
 def duplikat_surat(request):
 
@@ -151,7 +202,6 @@ def add_setting_klasifikasi(request):
         )
 
         db_klasifikasi.save()
-        # db_klasifikasi.clean_fields()
 
         return redirect('setting_klasifikasi')
     else:
@@ -251,6 +301,3 @@ def surat_terhapus(request):
 
 
 
-
-def semua_surat(request):
-    return render(request,'earsip/pages/surat/semua_surat.html')

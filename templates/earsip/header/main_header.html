@@ -18,29 +18,38 @@
           </li>
 
           <li class="nav-item">
-            <a class="nav-link {% if request.path == '/earsip/surat/' %} active {% endif %}" href="{% url 'surat' %}">Home</a>
+            <a class="nav-link {% if request.path == '/earsip/surat/' %} active {% endif %}" href="{% url 'surat' %}">Semua Arsip</a>
           </li>
 
           <li class="nav-item dropdown">
-            <a id="surat" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Surat</a>
+            <a id="surat" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Surat Masuk</a>
             <ul class="dropdown-menu">
+    
+
+
               <li>
-                <a class="dropdown-item  {% if request.path == '/earsip/tambah_surat/' %} active {% endif %}" href="{% url 'tambah_surat' %}">Tambah Surat</a>
+                <a class="dropdown-item {% if request.path == '/earsip/surat_harian/' %} active {% endif %}"  href="{% url 'surat_keluar' %}">Disposisi </a>
               </li>
+              
               <li>
                 <hr class="dropdown-divider" />
               </li>
               <li>
-                <a class="dropdown-item {% if request.path == '/earsip/semua_surat/' %} active {% endif %}"  href="{% url 'semua_surat' %}">Semua Surat</a>
+                <a class="dropdown-item {% if request.path == '/earsip/duplikat_surat/' %} active {% endif %}"  href="{% url 'duplikat_surat' %}">Surat Masuk</a>
               </li>
+          
+            </ul>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a id="surat" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Surat Keluar</a>
+            <ul class="dropdown-menu">
               <li>
-                <a class="dropdown-item {% if request.path == '/earsip/surat_harian/' %} active {% endif %}"  href="{% url 'surat_harian' %}">Surat Harian</a>
+                <a class="dropdown-item  {% if request.path == '/earsip/tambah_surat/' %} active {% endif %}" href="{% url 'tambah_surat' %}">Tambah Surat Keluar</a>
               </li>
+              
               <li>
-                <a class="dropdown-item {% if request.path == '/earsip/duplikat_surat/' %} active {% endif %}"  href="{% url 'duplikat_surat' %}">Duplikat Surat</a>
-              </li>
-              <li>
-                <a class="dropdown-item {% if request.path == '/admin/' %} active {% endif %}"  href="{% url 'admin:index' %}" >Surat Terhapus</a>
+                <a class="dropdown-item {% if request.path == '/earsip/surat_harian/' %} active {% endif %}"  href="{% url 'surat_keluar' %}">Surat Keluar</a>
               </li>
               
               <li>
@@ -52,8 +61,18 @@
             </ul>
           </li>
 
-          <li class="nav-item">
-            <a class="nav-link {% if request.path == '/earsip/laporan/' %} active {% endif %}" href="{% url 'laporan' %}">Laporan</a>
+          <li class="nav-item dropdown">
+            <a id="surat" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Laporan</a>
+            <ul class="dropdown-menu">
+              <li>
+                <a class="dropdown-item  {% if request.path == '/earsip/tambah_surat/' %} active {% endif %}" href="{% url 'tambah_surat' %}">Harian</a>
+              </li>
+          
+              <li>
+                <a class="dropdown-item {% if request.path == '/earsip/surat_harian/' %} active {% endif %}"  href="{% url 'surat_keluar' %}">Bulanan</a>
+              </li>
+             
+            </ul>
           </li>
 
           <li class="nav-item">
