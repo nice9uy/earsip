@@ -10,8 +10,63 @@
       </a>
 
       <ul class="nav nav-underline">
-       
+
         <div style="margin-right: 3.5rem; font-weight: bold; " class="d-flex gap-4">
+          <span class="mt-2 text-warning" >Selamat Datang , {{ user|capfirst }}</span>
+
+          <li class="nav-item">
+            <a class="nav-link"  href="">Dashboard</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="">Semua Arsip</a>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a id="surat" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Surat Masuk</a>
+            <ul class="dropdown-menu">
+
+
+              <li>
+                <a class="dropdown-item"  href="">Disposisi </a>
+              </li>
+              
+              <li>
+                <hr class="dropdown-divider" />
+              </li>
+              <li>
+                <a class="dropdown-item "  href="">Surat Masuk</a>
+              </li>
+          
+            </ul>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a id="surat" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Surat Keluar</a>
+            <ul class="dropdown-menu">
+
+
+              <li>
+                <a class="dropdown-item {% if request.path == '/earsip/pages/surat/tambah_surat/' %} active {% endif %}"  href="{% url 'tambah_surat' %}"  href="">Tambah Surat Keluar </a>
+              </li>
+              
+              <li>
+                <hr class="dropdown-divider" />
+              </li>
+              <li>
+                <a class="dropdown-item "  href="">Surat Keluar</a>
+              </li>
+          
+            </ul>
+          </li>
+
+
+          <li class="nav-item">
+            <a class="nav-link {% if request.path == '/admin/' %} active {% endif %} " href="{% url 'admin:index' %}">Admin</a>
+          </li>
+        
+       
+        {% comment %} <div style="margin-right: 3.5rem; font-weight: bold; " class="d-flex gap-4">
           <span class="mt-2 text-warning" >Selamat Datang , {{ user|capfirst }}</span>
           <li class="nav-item">
             <a class="nav-link {% if request.path == '/earsip/dashboard/' %} active {% endif %}" href="{% url 'dashboard' %}">Dashboard</a>
@@ -24,7 +79,6 @@
           <li class="nav-item dropdown">
             <a id="surat" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Surat Masuk</a>
             <ul class="dropdown-menu">
-    
 
 
               <li>
@@ -82,10 +136,19 @@
             <a class="nav-link {% if request.path == '/admin/' %} active {% endif %} " href="{% url 'admin:index' %}">Admin</a>
           </li>
         </div>
-      
+       {% endcomment %}
+
+
+
+
+
+       </div>
+
         <li class="nav-item">
           <a type="button" class="btn btn-danger fa fa-sign-out mt-1" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Logout" href="{% url 'logout' %}"></a>
         </li>
+
+
       </ul>
     </div>
   </nav>

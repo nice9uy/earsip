@@ -26,15 +26,28 @@
 <body style="font-family: Oswald, Helvetica, Arial, sans-serif!important; font-size: 14px;" class="text-light">
 
 
+
+
+            {% block tambah_surat %}{% endblock tambah_surat %}
+
+
+
+
+
             {% block dashboard %}{% endblock dashboard %}
             {% block laporan %}{% endblock laporan %}
             {% block surat %}{% endblock surat %}
-            {% block tambah_surat %}{% endblock tambah_surat %}
             {% block semua_surat %}{% endblock semua_surat %}
             {% block setting_klasifikasi %}{% endblock setting_klasifikasi %}
             {% block surat_harian %}{% endblock surat_harian %}
             {% block duplikat_surat %}{% endblock duplikat_surat %}
             {% block surat_terhapus %}{% endblock surat_terhapus %}
+
+
+            {% comment %} Sekretariat {% endcomment %}
+
+            {% block sekretariat_index %}{% endblock sekretariat_index %}
+            
 
             {% compress js inline %}
             <script type="text/javascript" src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
