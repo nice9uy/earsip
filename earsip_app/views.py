@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import Group
-# from . models import DatabaseSurat, DeleteSurat, KlasifikasiSurat, SubKlasifikasiSurat
+from . models import SemuaArsip, Disposisi, TempSuratKeluar, KlasifikasiSurat, ChecklistSubBag
 from django.shortcuts import render,redirect,get_object_or_404
 from datetime import datetime, date
 
@@ -25,12 +25,19 @@ def tambah_surat(request):
 
     # id_username = request.user.pk
     # username = request.user
+
     try:
         username = request.user
         group_name = Group.objects.get(user = username)
+        print(group_name)
 
     except:
         pass
+
+    get_surat = request.POST.get('surat')
+    get_surat = 'Masuk'
+    get_klasifikasi = request.POST.get('klasifikasi')
+
 
     # now = datetime.now()
     # year = now.strftime("%Y")
