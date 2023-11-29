@@ -23,21 +23,52 @@ def dashboard(request):
 @login_required(login_url="/accounts/login/")
 def tambah_surat(request):
 
-    # id_username = request.user.pk
-    # username = request.user
+    # now = datetime.today()
+    # time_now = now.strftime("%Y-%m-%d")
+    # jam = now.strftime("%H:%M:%S")
 
+    # username = request.user
+    # group_name = Group.objects.get(user = username)
+    # print(group_name)
+
+
+    klasifikasi_surat = list(KlasifikasiSurat.objects.all().values_list('klasifikasi', flat=True))
     try:
         username = request.user
         group_name = Group.objects.get(user = username)
-        print(group_name)
 
+        if request.method == 'POST':
+
+            get_surat = request.POST.get('no_surat')
+            get_kepada = request.POST.get('kepada')
+            get_tanggal = request.POST.get('tanggal')
+            get_perihal = request.POST.get('prihal')
+            get_klasifikasi = request.POST.get('klasifikasi')
+            get_file_name =  request.FILES.get('file_name')
+            
+            temp_tambah_surat = TempSuratKeluar(
+
+                username          = username,
+                group             = group_name, 
+                no_surat          = get_surat,
+                kepada            = get_kepada,
+                tgl_surat         = get_tanggal,
+                perihal           = get_perihal,
+                klasifikasi       = get_klasifikasi,
+                upload_file_arsip = get_file_name,
+
+            )
+            temp_tambah_surat.save()
+            return redirect('surat_keluar')
+        
     except:
         pass
+    
+    context = {
+        'klasifikasi' : klasifikasi_surat
+    }
 
-    get_surat = request.POST.get('surat')
-    get_surat = 'Masuk'
-    get_klasifikasi = request.POST.get('klasifikasi')
-
+    return render(request,'earsip/pages/surat/tambah_surat.html' , context)
 
     # now = datetime.now()
     # year = now.strftime("%Y")
@@ -122,13 +153,24 @@ def tambah_surat(request):
     # }
    
 
-    return render(request,'earsip/pages/surat/tambah_surat.html')
+   
 
 
 
 
 
+def surat_keluar(request):
+    username = request.user
+    group_name = Group.objects.get(user = username)
 
+    temp_surat_keluar = TempSuratKeluar.objects.filter()
+
+
+    context = {
+
+    }
+
+    return render(request,'earsip/pages/surat/surat_keluar.html')
 
 
 

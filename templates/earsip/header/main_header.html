@@ -47,14 +47,13 @@
 
 
               <li>
-                <a class="dropdown-item {% if request.path == '/earsip/pages/surat/tambah_surat/' %} active {% endif %}"  href="{% url 'tambah_surat' %}"  href="">Tambah Surat Keluar </a>
+                <a class="dropdown-item {% if request.path == '/earsip/pages/surat/tambah_surat/' %} active {% endif %}"  href="{% url 'tambah_surat' %}">Tambah Surat Keluar </a>
               </li>
-              
               <li>
                 <hr class="dropdown-divider" />
               </li>
               <li>
-                <a class="dropdown-item "  href="">Surat Keluar</a>
+                <a class="dropdown-item {% if request.path == '/earsip/pages/surat/surat_keluar/' %} active {% endif %} " href="{% url 'surat_keluar' %}"> Surat Keluar</a>
               </li>
           
             </ul>

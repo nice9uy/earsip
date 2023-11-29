@@ -5,7 +5,7 @@ urlpatterns = [
     path("dashboard/", views.dashboard, name="dashboard"),
     path("tambah_surat/", views.tambah_surat, name="tambah_surat"),
 
-
+    path("surat_keluar/", views.surat_keluar, name="surat_keluar"),
 
 
     # path("laporan/", views.laporan, name="laporan"),

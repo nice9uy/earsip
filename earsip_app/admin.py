@@ -24,9 +24,9 @@ class ListSemuaArsip(admin.ModelAdmin):
                      )
     
 class ListTempSuratKeluar(admin.ModelAdmin):
-    list_display =  ('id','username','group', 'surat', 'no_surat','no_surat',
+    list_display =  ('id','username','group', 'no_surat','no_surat',
                      'kepada','tgl_surat',
-                     'perihal','klasifikasi','tanggal_dibuat',
+                     'perihal','klasifikasi',
                      'upload_file_arsip',
                     
                      )
