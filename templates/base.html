@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" >
     <link rel="stylesheet" href="{% static 'css/dataTables.bootstrap5.min.css' %}">
     {% endcompress %}
-
+    {% comment %} <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/fixedcolumns/3.3.3/css/fixedColumns.dataTables.min.css"> {% endcomment %}
 
     {% compress js inline %}
     <script type="text/javascript" src="{% static 'js/chart.min.js' %}"></script> 
@@ -58,6 +58,19 @@
             <script type="text/javascript" src="{% static 'js/dataTables.bootstrap5.min.js' %}"></script> 
             
             {% endcompress %}
+
+            {% comment %} <script>
+                $(document).ready(function () {
+                    var table = $('#tabel_surat_keluar').DataTable({
+                        // Your DataTables options go here
+                    });
+        
+                    // Initialize FixedHeader
+                    new $.fn.dataTable.FixedHeader(table);
+                });
+
+            </script> {% endcomment %}
+            {% comment %} <script type="text/javascript" src="https://cdn.datatables.net/fixedcolumns/3.3.3/js/dataTables.fixedColumns.min.js"></script> {% endcomment %}
 
 </body>
 </html>

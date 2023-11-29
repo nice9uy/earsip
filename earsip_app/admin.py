@@ -24,10 +24,10 @@ class ListSemuaArsip(admin.ModelAdmin):
                      )
     
 class ListTempSuratKeluar(admin.ModelAdmin):
-    list_display =  ('id','username','group', 'no_surat','no_surat',
+    list_display =  ('id','username','group', 'no_surat',
                      'kepada','tgl_surat',
                      'perihal','klasifikasi',
-                     'upload_file_arsip',
+                     'upload_file_arsip','is_tu'
                     
                      )
 

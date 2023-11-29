@@ -1,7 +1,7 @@
 
 {% comment %} modal Tambah Klasifikasi  {% endcomment %}
-
-<div class="modal fade" id="ModalKlasifikasi" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+{% comment %} 
+<div class="modal fade" id="button_edit_surat_keluar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -9,7 +9,7 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
 
-        <form action="{% url 'add_setting_klasifikasi' %}" method="POST" class="was-validated">
+        <form action="" method="POST" class="was-validated">
           {% csrf_token %}
           <div class="modal-body">
               <div class="mb-3">
@@ -22,12 +22,12 @@
         </form>
       </div>
     </div>
-  </div>
+  </div> {% endcomment %}
 
 <!-- modal untuk edit klasifikasi -->
 
-  {% for data in klasifikasi %} 
-    <div class="modal fade" id="edit_klasifikasi{{ data.id }}" tabindex="-1" aria-labelledby="edit_klasifikasi" aria-hidden="true">
+  {% for data in temp_surat %} 
+    <div class="modal fade" id="button_edit_surat_keluar{{ data.id }}" tabindex="-1" aria-labelledby="edit_klasifikasi" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
@@ -35,7 +35,7 @@
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 
-            <form action="{% url 'edit_setting_klasifikasi' data.id %}" method="POST" class="was-validated">
+            <form action="" method="POST" class="was-validated">
               {% csrf_token %}
               <div class="modal-body">
                   <div class="mb-3">
@@ -63,7 +63,7 @@
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 
-            <form action="{% url 'delete_setting_klasifikasi' data.id %}" method="POST">
+            <form action="" method="POST">
               {% csrf_token %}
               <div class="modal-body">
                 <p>Apakah yakin Klasifikasi "{{data.klasifikasi}}" ini ingin dihapus?</p>
@@ -87,7 +87,7 @@
           <h1 class="modal-title fs-5" id="exampleModalLabel">Tambah Sub Klasifikasi</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-          <form action="{% url 'add_setting_subklasifikasi' %}" method="POST" class="was-validated">
+          <form action="" method="POST" class="was-validated">
             {% csrf_token %}
             <div class="modal-body">
                 <div class="mb-3">
@@ -114,7 +114,7 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
 
-        <form action="{% url 'edit_setting_subklasifikasi' data.id %}" method="POST" class="was-validated">
+        <form action="" method="POST" class="was-validated">
           {% csrf_token %}
           <div class="modal-body">
               <div class="mb-3">
@@ -142,7 +142,7 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
 
-        <form action="{% url 'delete_setting_subklasifikasi' data.id %}" method="POST">
+        <form action="" method="POST">
           {% csrf_token %}
           <div class="modal-body">
             <p>Apakah yakin Folder "{{data.subklasifikasi}}" ini ingin dihapus?</p>

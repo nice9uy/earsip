@@ -2,6 +2,7 @@ $(document).ready(function () {
   active_link_menu()
   validation()
   tabel_data()
+  // table_surat_keluar()
 });
 
 
@@ -18,10 +19,21 @@ function tabel_data(){
   new DataTable('#tabel_surat_keluar', {
     "searching": false,
     "dom": 'rtip',
-    fixedColumns: {
-      left: 1,
-      right: 1
-  },
+  //   fixedColumns: {
+  //     left: 4,
+     
+  // },
+//   //   paging: false,
+//   fixedColumns: {
+//     left: 2
+// },
+    scrollCollapse: true,
+    scrollX: true,
+    autoWidth: true,
+    // overflow-y: auto;
+  //   // scrollY: 300
+
+
   });
   new DataTable('#tabel_klasifikasi',{
     "searching": false,
@@ -33,6 +45,17 @@ function tabel_data(){
   });
 }
 
+// function table_surat_keluar(){
+//   var table = $('#tabel_surat_keluar').DataTable({
+//     // Your DataTables options go here
+//     });
+//   new $.fn.dataTable.FixedColumns(table, {
+//     leftColumns: 1,  // Number of columns to fix on the left
+//     rightColumns: 1  // Number of columns to fix on the right
+// });
+
+  
+// }
 
 function validation() {
   (() => {

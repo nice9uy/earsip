@@ -12,7 +12,6 @@ def dashboard(request):
 
 
 
-
     context = {
         'page_title' : "Dashboard"
     }
@@ -25,152 +24,106 @@ def tambah_surat(request):
 
     # now = datetime.today()
     # time_now = now.strftime("%Y-%m-%d")
-    # jam = now.strftime("%H:%M:%S")
+    # # jam = now.strftime("%H:%M:%S")
+
+    # print(time_now)
 
     # username = request.user
     # group_name = Group.objects.get(user = username)
     # print(group_name)
-
-
+  
+   
+    
     klasifikasi_surat = list(KlasifikasiSurat.objects.all().values_list('klasifikasi', flat=True))
-    try:
-        username = request.user
-        group_name = Group.objects.get(user = username)
 
-        if request.method == 'POST':
 
+    tu = ['TataUsaha_SET','TataUsaha_ALPALHAN','TataUsaha_BMN','TataUsaha_POSKON','TataUsaha_PUSKOD']
+
+   
+    username = request.user
+    group_name = Group.objects.get(user = username)
+    group = str(group_name)
+
+    print(group_name)
+        
+    if group in tu:
+            is_tu = 1
+    else:
+            is_tu = 0
+        
+    print(is_tu)
+        
+
+    if request.method == 'POST':
             get_surat = request.POST.get('no_surat')
             get_kepada = request.POST.get('kepada')
             get_tanggal = request.POST.get('tanggal')
             get_perihal = request.POST.get('prihal')
             get_klasifikasi = request.POST.get('klasifikasi')
             get_file_name =  request.FILES.get('file_name')
-            
+            get_is_tu  = is_tu
+
+                 
             temp_tambah_surat = TempSuratKeluar(
 
-                username          = username,
-                group             = group_name, 
-                no_surat          = get_surat,
-                kepada            = get_kepada,
-                tgl_surat         = get_tanggal,
-                perihal           = get_perihal,
-                klasifikasi       = get_klasifikasi,
-                upload_file_arsip = get_file_name,
+                    username          = username,
+                    group             = group_name, 
+                    no_surat          = get_surat,
+                    kepada            = get_kepada,
+                    tgl_surat         = get_tanggal,
+                    perihal           = get_perihal,
+                    klasifikasi       = get_klasifikasi,
+                    upload_file_arsip = get_file_name,
+                    is_tu             = get_is_tu
 
-            )
+                )
+
             temp_tambah_surat.save()
             return redirect('surat_keluar')
-        
-    except:
-        pass
-    
+
+
     context = {
-        'klasifikasi' : klasifikasi_surat
-    }
+            'klasifikasi' : klasifikasi_surat
+        }
 
     return render(request,'earsip/pages/surat/tambah_surat.html' , context)
 
-    # now = datetime.now()
-    # year = now.strftime("%Y")
-
-    # hari_ini = date.today()
-
-    # klasifikasi = KlasifikasiSurat.objects.filter(group = group_name).values_list('klasifikasi' , flat=True)
-    # subklasifikasi = SubKlasifikasiSurat.objects.filter(group = group_name).values_list('subklasifikasi' , flat=True)
-    
-    # print(klasifikasi)
-    # print(subklasifikasi)
-
-    # x = 'tes/567/xDe.08089.090.09/BBBBBB'
-    # r = str(x).split('/')
-    # c = r[2].split('.')
-    # final = c[0].upper()
-
-    # print(r)
-    # print(c)
-    # print(final)
-
-
-    # klasifikasi = KlasifikasiSurat.objects.filter(id_user = id_username).values_list("nama_klasifikasi" , flat=True)
-    # kelompok = KelompokSurat.objects.filter(id_user = id_username).values_list("nama_kelompok", flat=True)
-   
-    # get_surat = request.POST.get('surat')
-    # get_surat = 'Masuk'
-    # get_klasifikasi = request.POST.get('klasifikasi')
-    # # get_subklasifikasi = request.POST.get('subklasifikasi')
-    # get_tanggal = request.POST.get('tanggal')        # 'subklasifikasi' : subklasifikasi,
-
-
-    # files_upload = request.FILES.get('file_name')
-    # files_name = str(files_upload).split(',')
-
-    # filename_list_count = len(files_name)
-
-
-
-    # print(get_surat)
-    # print(get_klasifikasi)
-    # print(get_subklasifikasi)
-    # print(get_tanggal)
-
-
-    # try:  
-    #     no_surat = files_name[0]
-    #     kepada = files_name[1]
-    #     prihal = files_name[2] 
-    #     prihal_surat = prihal[:-4]
-
-    #     upload_data = DatabaseSurat(        # 'subklasifikasi' : subklasifikasi,
-
-    #         username        = username,
-    #         group           = group_name,
-    #         surat           = get_surat,
-    #         klasifikasi     = get_klasifikasi,
-    #         # subklasifikasi  = get_subklasifikasi,
-    #         tgl             = get_tanggal,
-    #         no_surat        = no_surat,
-    #         kepada          = kepada,
-    #         perihal         = prihal_surat,
-    #         upload_file     = files_upload,
-    #     )
-        
-    # except Exception:
-    #     pass
-        
-    # else:
-    #     if filename_list_count == 3:
-    #         upload_data.save()
-    #         return redirect('surat')
-    #     else:
-    #         # messages.warning(request,'bzdbdbzdb')
-    #         print("ada yang salah, cek lagi ")
-        
-    # context = {
-    #     'page_title' : 'Tambah Data',
-    #     'klasifikasi' : klasifikasi,
-    #     # 'subklasifikasi' : subklasifikasi,
-        
-    # }
-   
-
-   
-
-
-
-
 
 def surat_keluar(request):
-    username = request.user
-    group_name = Group.objects.get(user = username)
 
-    temp_surat_keluar = TempSuratKeluar.objects.filter()
 
+    try:
+        username = request.user
+        group_name = Group.objects.get(user = username)
+
+        tempp_surat_keluar = TempSuratKeluar.objects.filter(group = group_name).values()
+        # x = str(tempp_surat_keluar[0])
+        # y = x.split('_')
+
+        # temp_surat_final = y[0]
+
+        # name_grup = 'TataUsaha'
+
+        
+        # if temp_surat_final == name_grup:
+        #     is_admin = 1
+        # else:
+        #     is_admin = 0
+        #     print("Ini Ga bener")
+
+        # print(tempp_surat_keluar)
+
+
+    except:
+        pass
+
+    
 
     context = {
-
+        'temp_surat' : tempp_surat_keluar
     }
 
-    return render(request,'earsip/pages/surat/surat_keluar.html')
+    return render(request,'earsip/pages/surat/surat_keluar.html', context)
 
 
 

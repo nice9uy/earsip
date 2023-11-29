@@ -18,3 +18,9 @@ body, html {
 .test {
     background-color : red !important;;
 }
+
+/* th, td { white-space: nowrap; }
+div.dataTables_wrapper {
+    width: 800px;
+    margin: 0 auto;
+} */
