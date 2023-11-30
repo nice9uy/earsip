@@ -22,9 +22,10 @@
                 <th class="text-center">Kepada</th>
                 <th class="text-center">Tanggal Surat</th>
                 <th class="text-center">Perihal</th>
-                <th class="text-center">Klasifikasi</th>
+                {% comment %} <th class="text-center">Klasifikasi</th> {% endcomment %}
                 <th class="text-center">Files</th>
                 <th class="text-center">Aksi</th>
+                <th class="text-center">Kirim ke</th>
                 <th class="text-center">Simpan</th>
         </thead>
         <tbody>
@@ -35,7 +36,7 @@
                             <td>{{ data.kepada }}</td>
                             <td class="text-center ">{{ data.tgl_surat | date:"d M Y"}}</td>
                             <td>{{ data.perihal }}</td>
-                            <td class="text-center ">{{ data.klasifikasi }}</td>
+                            {% comment %} <td class="text-center ">{{ data.klasifikasi }}</td> {% endcomment %}
                             <td class="d-flex justify-content-center" > 
                                 <div style="margin-top: 6px;">
                                     <a  class="btn btn-success btn-sm   fa-solid fa-file-pdf" aria-current="page" title="Files"  target="_blank" href="/upload/{{ data.upload_file_arsip }}"> </a> 
@@ -45,11 +46,16 @@
                             <td class="text-center px-4"> 
                                 <button type="button" class="btn btn-success btn-sm  fas fa-edit"  data-bs-toggle="modal"  data-placement="bottom" title="Edit" data-bs-target="#button_edit_surat_keluar{{ data.id }}" ></button>
                                 <button type="button" class="btn btn-danger btn-sm   fa fa-trash"  data-bs-toggle="modal" data-placement="bottom" title="Hapus" data-bs-target="#button_delete_olah_data_harian{{ data.id }}"></button>
-                                <button type="button" class="btn btn-secondary   btn-sm fa fa-info-circle"  data-bs-toggle="modal" data-placement="bottom" title="Info" data-bs-target="#button_delete_olah_data_harian{{ data.id }}"></button>
-
-                            </td>
-                         <td class="text-center px-3"> 
                                 <button type="button" class="btn btn-danger btn-sm   fa-solid fa-print"  data-bs-toggle="modal" data-placement="bottom" title="Hapus" data-bs-target="#button_delete_olah_data_harian{{ data.id }}"></button>
+                            </td>
+                            <td class="text-center px-4"> 
+                                <button type="button" class="btn btn-success btn-sm  fas fa-edit"  data-bs-toggle="modal"  data-placement="bottom" title="Edit" data-bs-target="#button_edit_surat_keluar{{ data.id }}" ></button>
+                                <button type="button" class="btn btn-danger btn-sm   fa fa-trash"  data-bs-toggle="modal" data-placement="bottom" title="Hapus" data-bs-target="#button_delete_olah_data_harian{{ data.id }}"></button>
+                                <button type="button" class="btn btn-danger btn-sm   fa-solid fa-print"  data-bs-toggle="modal" data-placement="bottom" title="Hapus" data-bs-target="#button_delete_olah_data_harian{{ data.id }}"></button>
+                            </td>
+
+                            <td class="text-center px-3"> 
+                                <button type="button" class="btn btn-danger btn-sm far fa-save"  data-bs-toggle="modal" data-placement="bottom" title="Hapus" data-bs-target="#button_delete_olah_data_harian{{ data.id }}"></button>
                             </td> 
                         </tr>
                 {% endfor %}                

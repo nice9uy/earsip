@@ -31,30 +31,29 @@ def tambah_surat(request):
     # username = request.user
     # group_name = Group.objects.get(user = username)
     # print(group_name)
+    try:
   
-   
+        klasifikasi_surat = list(KlasifikasiSurat.objects.all().values_list('klasifikasi', flat=True))
+
+
+        tu = ['TataUsaha_SET','TataUsaha_ALPALHAN','TataUsaha_BMN','TataUsaha_POSKON','TataUsaha_PUSKOD']
+
     
-    klasifikasi_surat = list(KlasifikasiSurat.objects.all().values_list('klasifikasi', flat=True))
+        username = request.user
+        group_name = Group.objects.get(user = username)
+        group = str(group_name)
 
+        print(group_name)
+            
+        if group in tu:
+                is_tu = 1
+        else:
+                is_tu = 0
+            
+        print(is_tu)
+            
 
-    tu = ['TataUsaha_SET','TataUsaha_ALPALHAN','TataUsaha_BMN','TataUsaha_POSKON','TataUsaha_PUSKOD']
-
-   
-    username = request.user
-    group_name = Group.objects.get(user = username)
-    group = str(group_name)
-
-    print(group_name)
-        
-    if group in tu:
-            is_tu = 1
-    else:
-            is_tu = 0
-        
-    print(is_tu)
-        
-
-    if request.method == 'POST':
+        if request.method == 'POST':
             get_surat = request.POST.get('no_surat')
             get_kepada = request.POST.get('kepada')
             get_tanggal = request.POST.get('tanggal')
@@ -80,18 +79,18 @@ def tambah_surat(request):
 
             temp_tambah_surat.save()
             return redirect('surat_keluar')
-
+        
+    except:
+        pass
 
     context = {
-            'klasifikasi' : klasifikasi_surat
-        }
+                'klasifikasi' : klasifikasi_surat
+            }
 
     return render(request,'earsip/pages/surat/tambah_surat.html' , context)
 
 
 def surat_keluar(request):
-
-
     try:
         username = request.user
         group_name = Group.objects.get(user = username)
@@ -127,7 +126,48 @@ def surat_keluar(request):
 
 
 
+def edit_surat_keluar(request ,id_edit_surat_keluar):
+    edit_surat = get_object_or_404(TempSuratKeluar, pk = id_edit_surat_keluar)
 
+    if request.method == 'POST':
+
+        username = request.user
+        group_name = str(Group.objects.get(user = username))
+
+
+        get_surat       = request.POST.get('no_surat')
+        get_kepada      =  request.POST.get('kepada')
+        get_tanggal     = request.POST.get('tanggal')
+        get_perihal     = request.POST.get('prihal')
+        get_klasifikasi = edit_surat.klasifikasi
+        get_file_name   = edit_surat.upload_file_arsip.name
+        get_is_tu       = edit_surat.is_tu
+        
+        
+        edit_surat = TempSuratKeluar(
+             
+            id                 = id_edit_surat_keluar,
+            username           = str(username), 
+            group              = group_name,
+            no_surat           = get_surat, 
+            kepada             = get_kepada,
+            tgl_surat          = get_tanggal,
+            perihal            = get_perihal, 
+            klasifikasi        = get_klasifikasi,
+            upload_file_arsip  = get_file_name, 
+            is_tu              = get_is_tu,
+        )
+
+        edit_surat.save()
+
+        return redirect('surat_keluar')    
+    
+    context = {
+            
+    }
+
+    return render(request,'earsip/pages/surat/surat_keluar.html', context)
+      
 
 
 

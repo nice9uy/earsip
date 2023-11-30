@@ -6,7 +6,8 @@ urlpatterns = [
     path("tambah_surat/", views.tambah_surat, name="tambah_surat"),
 
     path("surat_keluar/", views.surat_keluar, name="surat_keluar"),
-
+    path('edit_surat_keluar/<int:id_edit_surat_keluar>/', views.edit_surat_keluar, name='edit_surat_keluar'),
+    path('edit_surat_keluar/<int:id_edit_surat_keluar>/', views.edit_surat_keluar, name='edit_surat_keluar'),
 
     # path("laporan/", views.laporan, name="laporan"),
     # path("surat/", views.surat, name="surat"),

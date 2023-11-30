@@ -55,7 +55,7 @@ class SemuaArsip(models.Model):
 class Disposisi(models.Model):
 
     id = models.AutoField(primary_key=True, unique=True)
-    no_surat  = models.ForeignKey(SemuaArsip , on_delete = models.PROTECT)
+    no_surat  = models.ForeignKey(SemuaArsip , on_delete = models.CASCADE)
     no_agenda  = models.TextField(max_length=40)
     notes      = models.TextField(max_length=200)
     username = models.CharField(max_length=30)
@@ -102,7 +102,7 @@ class TempSuratKeluar(models.Model):
 
 
 
-class KlasifikasiSurat(models.Model):
+class KlasifikasiSurat(models.Model): 
     id = models.AutoField(primary_key=True, unique=True)
     klasifikasi = models.CharField(max_length=30)
     class Meta:

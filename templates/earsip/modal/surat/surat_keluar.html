@@ -1,45 +1,28 @@
 
-{% comment %} modal Tambah Klasifikasi  {% endcomment %}
-{% comment %} 
-<div class="modal fade" id="button_edit_surat_keluar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalLabel">Tambah Klasifikasi</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-
-        <form action="" method="POST" class="was-validated">
-          {% csrf_token %}
-          <div class="modal-body">
-              <div class="mb-3">
-                    <input type="text" class="form-control" id="kode_klasifikasi_surat" name="klasifikasi_surat" autofocus required>
-              </div>
-          </div>
-          <div class="modal-footer">
-            <button type="submit" class="btn btn-primary">Save</button>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div> {% endcomment %}
-
-<!-- modal untuk edit klasifikasi -->
+<!-- modal untuk edit Edit Surat Keluar -->
 
   {% for data in temp_surat %} 
     <div class="modal fade" id="button_edit_surat_keluar{{ data.id }}" tabindex="-1" aria-labelledby="edit_klasifikasi" aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-lg">
           <div class="modal-content">
             <div class="modal-header">
-              <h1 class="modal-title fs-5" id="edit_klasifikasi">Edit Klasifikasi</h1>
+              <h1 class="modal-title fs-5" id="edit_klasifikasi">Edit Surat Keluar</h1>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 
-            <form action="" method="POST" class="was-validated">
+            <form action="{% url 'edit_surat_keluar' data.id %}" method="POST" class="was-validated">
               {% csrf_token %}
               <div class="modal-body">
-                  <div class="mb-3">
-                        <input type="text" class="form-control" name="klasifikasi_surat" required value="{{ data.klasifikasi }}">
+                  <div class="d-flex gap-2 mb-3"  >
+
+                        <input type="text" class="form-control" name="no_surat" required value="{{ data.no_surat }}">
+                        <input type="text" class="form-control" name="kepada" required value="{{ data.kepada }}">
+                        <input type="date" class="form-control" id="inputAddress" name="tanggal" placeholder="Tanggal Surat" required >
+                      
+                  </div>
+
+                  <div class="d-flex gap-2 mb-3"  >
+                      <input type="text" class="form-control" name="prihal" required value="{{ data.perihal }}">
                   </div>
               </div>
               <div class="modal-footer">
@@ -52,7 +35,7 @@
 {% endfor %}
 
 
-  <!-- modal untuk delete klasifikasi -->
+  <!-- modal untuk delete Edit Surat Keluar -->
 
 {% for data in klasifikasi %} 
       <div class="modal fade" id="delete_klasifikasi{{ data.id }}" tabindex="-1" aria-labelledby="delete_klasifikasi" aria-hidden="true">
