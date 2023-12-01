@@ -14,6 +14,7 @@
             <h5 class="mx-auto">Periksa Kembali Sebelum Disimpan</h5>
         </div>
     </form>
+    
     <table id="tabel_surat_keluar" class="display table table-striped table-bordered text-white order-column" style="width:100%; overflow-y: auto ;">
         <thead>
             <tr>
@@ -26,6 +27,7 @@
                 <th class="text-center">Files</th>
                 <th class="text-center">Aksi</th>
                 <th class="text-center">Kirim ke</th>
+                <th class="text-center">Print</th>
                 <th class="text-center">Simpan</th>
         </thead>
         <tbody>
@@ -45,13 +47,16 @@
                             </td>
                             <td class="text-center px-4"> 
                                 <button type="button" class="btn btn-success btn-sm  fas fa-edit"  data-bs-toggle="modal"  data-placement="bottom" title="Edit" data-bs-target="#button_edit_surat_keluar{{ data.id }}" ></button>
+                                <button type="button" class="btn btn-danger btn-sm   fa fa-trash"  data-bs-toggle="modal" data-placement="bottom" title="Hapus" data-bs-target="#button_delete_surat_keluar{{ data.id }}"></button>
+                            </td>
+                            <td class="text-center px-4"> 
+                                <button type="button" class="btn btn-success btn-sm  fas fa-edit"  data-bs-toggle="modal"  data-placement="bottom" title="Kabaranahan" data-bs-target="#button_edit_surat_keluar{{ data.id }}" ></button>
                                 <button type="button" class="btn btn-danger btn-sm   fa fa-trash"  data-bs-toggle="modal" data-placement="bottom" title="Hapus" data-bs-target="#button_delete_olah_data_harian{{ data.id }}"></button>
                                 <button type="button" class="btn btn-danger btn-sm   fa-solid fa-print"  data-bs-toggle="modal" data-placement="bottom" title="Hapus" data-bs-target="#button_delete_olah_data_harian{{ data.id }}"></button>
                             </td>
                             <td class="text-center px-4"> 
-                                <button type="button" class="btn btn-success btn-sm  fas fa-edit"  data-bs-toggle="modal"  data-placement="bottom" title="Edit" data-bs-target="#button_edit_surat_keluar{{ data.id }}" ></button>
-                                <button type="button" class="btn btn-danger btn-sm   fa fa-trash"  data-bs-toggle="modal" data-placement="bottom" title="Hapus" data-bs-target="#button_delete_olah_data_harian{{ data.id }}"></button>
-                                <button type="button" class="btn btn-danger btn-sm   fa-solid fa-print"  data-bs-toggle="modal" data-placement="bottom" title="Hapus" data-bs-target="#button_delete_olah_data_harian{{ data.id }}"></button>
+                                <button type="button" class="btn btn-success btn-sm  fa-solid fa-print"  data-bs-toggle="modal"  data-placement="bottom" title="Print" data-bs-target="#button_print{{ data.id }}" ></button>
+                               
                             </td>
 
                             <td class="text-center px-3"> 

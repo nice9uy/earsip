@@ -169,7 +169,42 @@ def edit_surat_keluar(request ,id_edit_surat_keluar):
     return render(request,'earsip/pages/surat/surat_keluar.html', context)
       
 
+def delete_surat_keluar(request , id_delete_surat_keluar):
+    delete_surat = get_object_or_404(TempSuratKeluar, pk = id_delete_surat_keluar)
+    upload_file   = TempSuratKeluar.objects.get(pk = id_delete_surat_keluar)
 
+    if request.method == 'POST':
+        upload_file.upload_file_arsip.delete()
+
+        username = request.user
+        group_name = str(Group.objects.get(user = username))
+
+
+        get_surat       = request.POST.get('no_surat')
+        get_kepada      = request.POST.get('kepada')
+        get_tanggal     = request.POST.get('tanggal')
+        get_perihal     = request.POST.get('prihal')
+        get_klasifikasi = delete_surat.klasifikasi
+        get_is_tu       = delete_surat.is_tu
+
+        delete_surat = TempSuratKeluar(
+             
+            id                 = id_delete_surat_keluar,
+            username           = str(username), 
+            group              = group_name,
+            no_surat           = get_surat, 
+            kepada             = get_kepada,
+            tgl_surat          = get_tanggal,
+            perihal            = get_perihal, 
+            klasifikasi        = get_klasifikasi,
+            is_tu              = get_is_tu,
+        )
+
+        delete_surat.delete()
+        return redirect('surat_keluar')   
+
+
+    return render(request,'earsip/pages/surat/surat_keluar.html')
 
 
 

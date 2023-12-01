@@ -7,7 +7,7 @@ urlpatterns = [
 
     path("surat_keluar/", views.surat_keluar, name="surat_keluar"),
     path('edit_surat_keluar/<int:id_edit_surat_keluar>/', views.edit_surat_keluar, name='edit_surat_keluar'),
-    path('edit_surat_keluar/<int:id_edit_surat_keluar>/', views.edit_surat_keluar, name='edit_surat_keluar'),
+    path('delete_surat_keluar/<int:id_delete_surat_keluar>/', views.delete_surat_keluar, name='delete_surat_keluar'),
 
     # path("laporan/", views.laporan, name="laporan"),
     # path("surat/", views.surat, name="surat"),
