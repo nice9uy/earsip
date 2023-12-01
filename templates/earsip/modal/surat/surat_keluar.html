@@ -23,6 +23,17 @@
 
                   <div class="d-flex gap-2 mb-3"  >
                       <input type="text" class="form-control" name="prihal" required value="{{ data.perihal }}">
+
+                      <div class="col-4">
+
+                        <select class="form-select" aria-label="Default select example" name="klasifikasi" required >
+                          <option value="">Klasifikasi Surat</option>
+                          {% for data in klasifikasi %}
+                              <option value="{{ data }}"> {{  data }}</option>
+                          {% endfor %}
+        
+                        </select>
+                      </div>
                   </div>
               </div>
               <div class="modal-footer">
@@ -61,9 +72,54 @@
 {% endfor %}
 
 
+{% for data in temp_surat %} 
+      <div class="modal fade" id="button_simpan_ke_arsip{{ data.id }}" tabindex="-1" aria-labelledby="delete_klasifikasi" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="delete_klasifikasi">Simpan Ke Arsip</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <form action="{% url 'delete_surat_keluar' data.id %}" method="POST">
+              {% csrf_token %}
+              <div class="modal-body">
+                <p>Apakah yakin No Surat "{{data.no_surat}}" ini ingin dihapus?</p>
+              </div>
+              <div class="modal-footer">
+                <button type="submit" class="btn btn-primary">Hapus</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+{% endfor %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 {% comment %} untuk Print {% endcomment %}
 
-{% for data in temp_surat %} 
+{% comment %} {% for data in temp_surat %} 
       <div class="modal fade" id="button_print{{ data.id }}" tabindex="-1" aria-labelledby="delete_klasifikasi" aria-hidden="true">
         <div class="modal-dialog modal-xl">
           <div class="modal-content">
@@ -133,7 +189,7 @@
           </div>
         </div>
       </div>
-{% endfor %}
+{% endfor %} {% endcomment %}
 
 
 

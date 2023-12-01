@@ -43,14 +43,14 @@ def tambah_surat(request):
         group_name = Group.objects.get(user = username)
         group = str(group_name)
 
-        print(group_name)
+        # print(group_name)
             
         if group in tu:
                 is_tu = 1
         else:
                 is_tu = 0
             
-        print(is_tu)
+        # print(is_tu)
             
 
         if request.method == 'POST':
@@ -96,30 +96,16 @@ def surat_keluar(request):
         group_name = Group.objects.get(user = username)
 
         tempp_surat_keluar = TempSuratKeluar.objects.filter(group = group_name).values()
-        # x = str(tempp_surat_keluar[0])
-        # y = x.split('_')
+        klasifikasi_surat = list(KlasifikasiSurat.objects.all().values_list('klasifikasi', flat=True))
 
-        # temp_surat_final = y[0]
-
-        # name_grup = 'TataUsaha'
-
-        
-        # if temp_surat_final == name_grup:
-        #     is_admin = 1
-        # else:
-        #     is_admin = 0
-        #     print("Ini Ga bener")
-
-        # print(tempp_surat_keluar)
-
-
+    
     except:
         pass
 
-    
 
     context = {
-        'temp_surat' : tempp_surat_keluar
+        'temp_surat' : tempp_surat_keluar,
+        'klasifikasi': klasifikasi_surat
     }
 
     return render(request,'earsip/pages/surat/surat_keluar.html', context)
@@ -139,7 +125,7 @@ def edit_surat_keluar(request ,id_edit_surat_keluar):
         get_kepada      =  request.POST.get('kepada')
         get_tanggal     = request.POST.get('tanggal')
         get_perihal     = request.POST.get('prihal')
-        get_klasifikasi = edit_surat.klasifikasi
+        get_klasifikasi = request.POST.get('klasifikasi')
         get_file_name   = edit_surat.upload_file_arsip.name
         get_is_tu       = edit_surat.is_tu
         
@@ -207,10 +193,53 @@ def delete_surat_keluar(request , id_delete_surat_keluar):
     return render(request,'earsip/pages/surat/surat_keluar.html')
 
 
+def simpan_ke_arsip(request, id_surat_keluar ):
+        now = datetime.today()
+        time_now = now.strftime("%Y-%m-%d")
 
+        username = request.user
+        group_name = Group.objects.get(user = username)
+        group = str(group_name)
 
+        surat = "Masuk"
 
+        temp_surat_keluar = get_object_or_404(TempSuratKeluar, pk = id_surat_keluar)
 
+        # Save to Arsip Database
+
+        if request.method == 'POST':
+
+            username = request.user
+            group_name = str(Group.objects.get(user = username))
+
+            get_surat         = str(surat)
+            get_no_surat      = request.POST.get('no_surat')
+            get_kepada        = request.POST.get('kepada')
+            get_surat_dari    = request.POST.get('surat_dari')
+            
+            get_tanggal       = request.POST.get('tanggal')
+            get_perihal       = request.POST.get('prihal')
+            get_klasifikasi   = request.POST.get('klasifikasi')
+
+            get_tanggal_dibuat = time_now
+            get_file_name      = temp_surat_keluar.upload_file_arsip.file
+            get_is_tu          = temp_surat_keluar.is_tu
+            
+            
+            edit_surat = TempSuratKeluar(
+                
+                username           = str(username), 
+                group              = group_name,
+                no_surat           = get_surat, 
+                kepada             = get_kepada,
+                tgl_surat          = get_tanggal,
+                perihal            = get_perihal, 
+                klasifikasi        = get_klasifikasi,
+                upload_file_arsip  = get_file_name, 
+                is_tu              = get_is_tu,
+            )
+
+            edit_surat.save()
 
 
 
