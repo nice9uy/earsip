@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import Group
-from . models import SemuaArsip, Disposisi, TempSuratKeluar, KlasifikasiSurat, ChecklistSubBag
+from . models import SemuaArsip, Disposisi, KlasifikasiSurat, ChecklistSubBag
 from django.shortcuts import render,redirect,get_object_or_404
 from datetime import datetime, date
 
@@ -10,7 +10,18 @@ from datetime import datetime, date
 @login_required(login_url="/accounts/login/")
 def dashboard(request):
 
+    username = request.user
+    group_name = Group.objects.get(user = username)
 
+
+    # tempp_surat_keluar = TempSuratKeluar.objects.filter(group = group_name , id = 4 ).values()
+
+    # print(tempp_surat_keluar)
+
+    # x = tempp_surat_keluar.filter('kepada')
+
+    # print(x)
+    
 
     context = {
         'page_title' : "Dashboard"
@@ -22,8 +33,8 @@ def dashboard(request):
 @login_required(login_url="/accounts/login/")
 def tambah_surat(request):
 
-    # now = datetime.today()
-    # time_now = now.strftime("%Y-%m-%d")
+    now = datetime.today()
+    time_now = now.strftime("%Y-%m-%d")
     # # jam = now.strftime("%H:%M:%S")
 
     # print(time_now)
@@ -31,49 +42,55 @@ def tambah_surat(request):
     # username = request.user
     # group_name = Group.objects.get(user = username)
     # print(group_name)
+    
     try:
-  
+        tu = ['TataUsaha_SET','TataUsaha_ALPALHAN','TataUsaha_BMN','TataUsaha_POSKON','TataUsaha_PUSKOD']
+        spri = ['Spri_SET','Spri_ALPALHAN','Spri_BMN','Spri_POSKON','Spri_PUSKOD']
         klasifikasi_surat = list(KlasifikasiSurat.objects.all().values_list('klasifikasi', flat=True))
 
-
-        tu = ['TataUsaha_SET','TataUsaha_ALPALHAN','TataUsaha_BMN','TataUsaha_POSKON','TataUsaha_PUSKOD']
-
-    
         username = request.user
         group_name = Group.objects.get(user = username)
         group = str(group_name)
-
-        # print(group_name)
             
         if group in tu:
                 is_tu = 1
         else:
                 is_tu = 0
+
+        if group in spri:
+             is_spri = 1
+        else:
+             is_spri = 0
             
         # print(is_tu)
             
-
         if request.method == 'POST':
             get_surat = request.POST.get('no_surat')
             get_kepada = request.POST.get('kepada')
             get_tanggal = request.POST.get('tanggal')
             get_perihal = request.POST.get('prihal')
             get_klasifikasi = request.POST.get('klasifikasi')
+            get_tanggal_dibuat = time_now
             get_file_name =  request.FILES.get('file_name')
+            # get_is_read = 
             get_is_tu  = is_tu
+            get_is_spri = is_spri
 
                  
-            temp_tambah_surat = TempSuratKeluar(
+            temp_tambah_surat = SemuaArsip(
 
                     username          = username,
                     group             = group_name, 
+
                     no_surat          = get_surat,
                     kepada            = get_kepada,
                     tgl_surat         = get_tanggal,
                     perihal           = get_perihal,
                     klasifikasi       = get_klasifikasi,
+                    tanggal_dibuat    = get_tanggal_dibuat,
                     upload_file_arsip = get_file_name,
-                    is_tu             = get_is_tu
+                    is_tu             = get_is_tu,
+                    is_spri           = get_is_spri
 
                 )
 
@@ -95,9 +112,8 @@ def surat_keluar(request):
         username = request.user
         group_name = Group.objects.get(user = username)
 
-        tempp_surat_keluar = TempSuratKeluar.objects.filter(group = group_name).values()
+        tempp_surat_keluar = SemuaArsip.objects.filter(group = group_name).values()
         klasifikasi_surat = list(KlasifikasiSurat.objects.all().values_list('klasifikasi', flat=True))
-
     
     except:
         pass
@@ -113,7 +129,7 @@ def surat_keluar(request):
 
 
 def edit_surat_keluar(request ,id_edit_surat_keluar):
-    edit_surat = get_object_or_404(TempSuratKeluar, pk = id_edit_surat_keluar)
+    edit_surat = get_object_or_404(SemuaArsip, pk = id_edit_surat_keluar)
 
     if request.method == 'POST':
 
@@ -130,7 +146,7 @@ def edit_surat_keluar(request ,id_edit_surat_keluar):
         get_is_tu       = edit_surat.is_tu
         
         
-        edit_surat = TempSuratKeluar(
+        edit_surat = SemuaArsip(
              
             id                 = id_edit_surat_keluar,
             username           = str(username), 
@@ -156,8 +172,8 @@ def edit_surat_keluar(request ,id_edit_surat_keluar):
       
 
 def delete_surat_keluar(request , id_delete_surat_keluar):
-    delete_surat = get_object_or_404(TempSuratKeluar, pk = id_delete_surat_keluar)
-    upload_file   = TempSuratKeluar.objects.get(pk = id_delete_surat_keluar)
+    delete_surat = get_object_or_404(SemuaArsip, pk = id_delete_surat_keluar)
+    upload_file   = SemuaArsip.objects.get(pk = id_delete_surat_keluar)
 
     if request.method == 'POST':
         upload_file.upload_file_arsip.delete()
@@ -173,7 +189,7 @@ def delete_surat_keluar(request , id_delete_surat_keluar):
         get_klasifikasi = delete_surat.klasifikasi
         get_is_tu       = delete_surat.is_tu
 
-        delete_surat = TempSuratKeluar(
+        delete_surat = SemuaArsip(
              
             id                 = id_delete_surat_keluar,
             username           = str(username), 
@@ -201,51 +217,58 @@ def simpan_ke_arsip(request, id_surat_keluar ):
         group_name = Group.objects.get(user = username)
         group = str(group_name)
 
-        surat = "Masuk"
+        surat = "Keluar"
 
-        temp_surat_keluar = get_object_or_404(TempSuratKeluar, pk = id_surat_keluar)
+        tempp_surat_keluar = SemuaArsip.objects.filter(group = group_name).values()
+        # temp_surat_keluar = get_object_or_404(TempSuratKeluar)
 
         # Save to Arsip Database
 
         if request.method == 'POST':
-
-            username = request.user
-            group_name = str(Group.objects.get(user = username))
+            
+            username          = request.user
+            group_name        = str(Group.objects.get(user = username))
 
             get_surat         = str(surat)
             get_no_surat      = request.POST.get('no_surat')
+
             get_kepada        = request.POST.get('kepada')
-            get_surat_dari    = request.POST.get('surat_dari')
+            # get_surat_dari    = request.POST.get('surat_dari')
             
             get_tanggal       = request.POST.get('tanggal')
             get_perihal       = request.POST.get('prihal')
             get_klasifikasi   = request.POST.get('klasifikasi')
 
             get_tanggal_dibuat = time_now
-            get_file_name      = temp_surat_keluar.upload_file_arsip.file
-            get_is_tu          = temp_surat_keluar.is_tu
+            get_file_name      = tempp_surat_keluar.upload_file_arsip.file
+            get_is_tu          = tempp_surat_keluar.is_tu
             
             
-            edit_surat = TempSuratKeluar(
+            simpan_surat = SemuaArsip(
                 
                 username           = str(username), 
                 group              = group_name,
-                no_surat           = get_surat, 
+                surat              = get_surat,
+                no_surat           = get_no_surat, 
+
                 kepada             = get_kepada,
                 tgl_surat          = get_tanggal,
                 perihal            = get_perihal, 
                 klasifikasi        = get_klasifikasi,
+                tanggal_dibuat     = get_tanggal_dibuat,
+
                 upload_file_arsip  = get_file_name, 
                 is_tu              = get_is_tu,
             )
 
-            edit_surat.save()
+            print(simpan_surat)
+            # edit_surat.save()
+
+            return redirect('semua_surat')   
 
 
 
-
-
-
+        return render(request,'earsip/pages/surat/surat_keluar.html')
 
 
 

@@ -34,18 +34,21 @@ class SemuaArsip(models.Model):
     id = models.AutoField(primary_key=True, unique=True)
     username = models.CharField(max_length=30)
     group = models.CharField(max_length=20)
-    surat = models.CharField(max_length=10)
+
+    surat = models.CharField(max_length=10  , null=True)
+    surat_dari = models.CharField(max_length=30, null=True)
+
     no_surat = models.CharField(max_length=20)
     kepada = models.CharField(max_length=200)
-    surat_dari = models.CharField(max_length=30)
     tgl_surat = models.DateField()
     perihal = models.CharField(max_length=200)
     klasifikasi = models.CharField(max_length=30)
     tanggal_dibuat = models.DateField()
     upload_file_arsip = models.FileField(upload_to= user_folder, null=False, blank=False)
-    is_read = models.CharField(max_length=2)
-    is_tu = models.IntegerField()
-    is_admin = models.CharField(max_length=2)
+    is_read = models.CharField(max_length=2, null=True)
+    is_tu = models.IntegerField(null = True)
+    is_spri = models.CharField(max_length=2 , null=True)
+    is_admin = models.CharField(max_length=2 , null=True)
 
     def __str__(self):
         return self.no_surat
@@ -84,21 +87,21 @@ class Disposisi(models.Model):
 #     class Meta:
 #         db_table = "TempDisposisi"
 
-class TempSuratKeluar(models.Model):
+# class TempSuratKeluar(models.Model):
   
-    id = models.AutoField(primary_key=True, unique=True)
-    username = models.CharField(max_length=30)
-    group = models.CharField(max_length=20)
-    no_surat = models.CharField(max_length=20)
-    kepada = models.CharField(max_length=200)
-    tgl_surat = models.DateField()
-    perihal = models.CharField(max_length=200)
-    klasifikasi = models.CharField(max_length=30)
-    upload_file_arsip = models.FileField(upload_to= user_folder, null=False, blank=False)
-    is_tu = models.IntegerField()
+#     id = models.AutoField(primary_key=True, unique=True)
+#     username = models.CharField(max_length=30)
+#     group = models.CharField(max_length=20)
+#     no_surat = models.CharField(max_length=20)
+#     kepada = models.CharField(max_length=200)
+#     tgl_surat = models.DateField()
+#     perihal = models.CharField(max_length=200)
+#     klasifikasi = models.CharField(max_length=30)
+#     upload_file_arsip = models.FileField(upload_to= user_folder, null=False, blank=False)
+#     is_tu = models.IntegerField()
 
-    class Meta:
-        db_table = "TempSuratKeluar"
+#     class Meta:
+#         db_table = "TempSuratKeluar"
 
 
 

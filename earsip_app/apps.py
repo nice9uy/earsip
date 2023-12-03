@@ -5,6 +5,7 @@ def create_group(sender, **kwargs):
     from django.contrib.auth.models import Group
 
     group_names = ['TataUsaha_SET','TataUsaha_ALPALHAN','TataUsaha_BMN','TataUsaha_POSKON','TataUsaha_PUSKOD',
+                   'Spri_SET', 'Spri_ALPALHAN' , 'Spri_BMN' , 'Spri_POSKON', 'Spri_PUSKOD',
                    'DATIN','PROGLAP','MALUR',
                 ]
 
